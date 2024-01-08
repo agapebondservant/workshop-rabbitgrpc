@@ -11,11 +11,10 @@ echo "Hostname is $HOSTNAME"
 if [ "$HOSTNAME" = "rabbit1" ]; then
     /usr/local/bin/docker-entrypoint.sh rabbitmq-server
 else
-    /usr/local/bin/docker-entrypoint.sh rabbitmq-server -detached
+    /usr/local/bin/docker-entrypoint.sh rabbitmq-server -detached >> /var/log/rabbitmq/output.log 2>&1
     rabbitmqctl wait /var/lib/rabbitmq/mnesia/rabbit\@$HOSTNAME.pid
-    sleep 5
     rabbitmqctl stop_app
     rabbitmqctl join_cluster rabbit@rabbit1
     rabbitmqctl start_app
-    touch test.log && tail -f test.log
+    tail -f /var/log/rabbitmq/output.log
 fi
