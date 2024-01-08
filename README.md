@@ -1,0 +1,1 @@
+## Setting up OpenTelemetry Log Ingestion with RabbitMQ

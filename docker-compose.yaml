@@ -1,0 +1,42 @@
+services:
+  rabbitmq1:
+    image: rabbitmq:3.12-management-alpine
+    container_name: 'rabbit1'
+    hostname: 'rabbit1'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./conf/data1/:/var/lib/rabbitmq/
+      - ./conf/log1/:/var/log/rabbitmq/
+      - ./.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh
+    entrypoint: /usr/local/bin/entrypoint.sh
+
+  rabbitmq2:
+    image: rabbitmq:3.12-management-alpine
+    container_name: 'rabbit2'
+    hostname: 'rabbit2'
+    ports:
+      - 5673:5672
+      - 15673:15672
+    volumes:
+      - ./conf/data2/:/var/lib/rabbitmq/
+      - ./conf/log2/:/var/log/rabbitmq/
+      - ./.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh
+    entrypoint: /usr/local/bin/entrypoint.sh
+
+  rabbitmq3:
+    image: rabbitmq:3.12-management-alpine
+    container_name: 'rabbit3'
+    hostname: 'rabbit3'
+    ports:
+      - 5674:5672
+      - 15674:15672
+    volumes:
+      - ./conf/data3/:/var/lib/rabbitmq/
+      - ./conf/log3/:/var/log/rabbitmq/
+      - ./.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh
+    entrypoint: /usr/local/bin/entrypoint.sh
